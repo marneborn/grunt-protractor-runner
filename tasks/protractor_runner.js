@@ -18,13 +18,6 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('protractor', 'A grunt task to run protractor.', function() {
 
-    // '.../node_modules/protractor/lib/protractor.js'
-    var protractorMainPath = require.resolve('protractor');
-    // '.../node_modules/protractor/bin/protractor'
-    var protractorBinPath = path.resolve(protractorMainPath, '../../bin/protractor');
-    // '.../node_modules/protractor/bin/webdriver-manager'
-    var webdriverManagerPath = path.resolve(protractorMainPath, '../../bin/webdriver-manager');
-
     // Merge task-specific and/or target-specific options with these defaults.
     var opts = this.options({
       keepAlive: false,
@@ -34,8 +27,14 @@ module.exports = function(grunt) {
       args: {},
       output: false,
       outputOptions: {},
-      webdriverManagerUpdate: false
+      webdriverManagerUpdate: false,
+      protractorMainPath: require.resolve('protractor')
     });
+
+    // '.../node_modules/protractor/bin/protractor'
+    var protractorBinPath = path.resolve(opts.protractorMainPath, '../../bin/protractor');
+    // '.../node_modules/protractor/bin/webdriver-manager'
+    var webdriverManagerPath = path.resolve(opts.protractorMainPath, '../../bin/webdriver-manager');
 
     // configFile is a special property which need not to be in options{} object.
     if (!grunt.util._.isUndefined(this.data.configFile)) {

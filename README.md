@@ -144,6 +144,22 @@ Default value: `false`
 
 If true, `webdriver-manager update` will run and install/update selenium driver.
 
+#### options.protractorMainPath
+Type: `String`
+Default value: `node_modules/grunt-protractor-runner/node_modules/protractor`
+
+Option to point at a specific version of protractor
+
+```js
+grunt.initConfig({
+  protractor: {
+    options: {
+      protractorMainPath: require.resolve('protractor') // use my installed protractor instead of the default.
+    }
+  }
+});
+```
+
 ## Tests
 
 Run `npm install` to install dependencies.
@@ -165,10 +181,10 @@ This plugin installs `protractor` module locally as a normal dependency.
 
 In case you want to use the plugin with the global installed protractor command. You can do it with these steps below.
 
-* Remove local install protractor by `rm -rf node_modules/protractor`
 * Install `protractor` globally  with `npm install -g protractor`
 * Make sure that node can resolve the module with `require()` mechanism. See [Module loading from the global folders](http://nodejs.org/api/modules.html#modules_loading_from_the_global_folders) for more information.
 * Run `webdriver-manager update` to install/update selenium driver for global install protractor.
+* Add `protractorMainPath: require.resolve('protractor')` to your options.
 
 ### Q: Error: Could not find chromedriver at....
 
